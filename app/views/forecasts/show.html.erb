@@ -1,0 +1,45 @@
+<%= render "shared/flash" %>
+
+<h1>Forecast</h1>
+
+
+<%= form_with(method: 'get', local: true, id: 'forecast-form') do %>
+    <%= label :address, "What is your address?" %><br>
+    <%= text_field_tag(:address, @address || @address_default, size: 70) %><br>
+    <%= submit_tag("Lookup") %><button>
+    <%= link_to "Update Histories", update_search_path, class: "button" %></button>
+<% end %>
+
+<% if defined?(@weather) %>
+    <ul>
+        <li>Temperature: <%= @weather.temperature %> ℃</li>
+        <li>Temperature Minimum: <%= @weather.temperature_min %> ℃</li>
+        <li>Temperature Maximum: <%= @weather.temperature_max %> ℃</li>
+        <li>Humidity: <%= @weather.humidity %>%</li>
+        <li>Pressure: <%= @weather.pressure %> millibars</li>
+        <li>Description: <%= @weather.description %></li>
+    </ul>
+<% end %>
+
+<section>
+  <div class="container">
+    <div class="box">
+      <div class="box-header">
+        <h1>Recent Searches</h1>
+      </div>
+    </div>
+
+    <div class="box-body" id="history-container">
+      <% if @histories %>
+        <% @histories.each do |h|%>
+          <ul>
+            <span style="color: red"><li>Town: <%= h.town %></li></span>
+            <li>Temperature: <%= h.temperature %> ℃</li>
+            <li>Description: <%= h.description %></li>
+            <li>Postal Code: <%= h.postal_code %></li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+  </div> 
+</section>

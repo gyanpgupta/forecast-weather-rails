@@ -1,0 +1,12 @@
+<div class="box-body" id="history-container">
+      <% if @histories %>
+        <% @histories.each do |h|%>
+          <ul>
+            <span style="color: red"><li>Town: <%= h.town %></li></span>
+            <li>Temperature: <%= h.temperature %> ℃</li>
+            <li>Description: <%= h.description %></li>
+            <li>Postal Code: <%= h.postal_code %></li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
